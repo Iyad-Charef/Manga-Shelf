@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Library Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <h2>Manga Shelf</h2>
+        </div>
+        <div class="navbar-search">
+            <form id="search-form" class="search-form">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="form-control" 
+                    placeholder="Search for manga titles..."
+                    required
+                >
+                <button type="submit" class="btn btn--primary">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-view="home">
+                    <span>🏠</span> Home
+                </button>
+                <button class="nav-btn" data-view="read">
+                    <span>📖</span> Read Library
+                </button>
+                <button class="nav-btn" data-view="liked">
+                    <span>❤️</span> Liked Library
+                </button>
+            </nav>
+        </aside>
+
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <div class="loading-spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Error Message -->
+        <!-- Error message -->
+        <div id="error-message" class="error-message hidden">
+            <div class="status status--error">
+                <span id="error-text">An error occurred</span>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message hidden">
+            <div class="status status--success">
+                <span id="success-text">Success!</span>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- Home View - Search Results -->
+            <div id="home-view" class="view active">
+                <div class="view-header">
+                    <h1>Welcome to Manga Library Tracker</h1>
+                    <p>Search for manga titles using the MangaDx API and manage your personal library</p>
+                </div>
+
+                <div id="search-results" class="manga-grid">
+                    <!-- Search results will be populated here -->
+                </div>
+
+                <div id="no-results" class="no-results hidden">
+                    <h3>No manga found</h3>
+                    <p>Try searching for a different title</p>
+                </div>
+            </div>
+
+            <!-- Read Library View -->
+            <div id="read-view" class="view hidden">
+                <div class="view-header">
+                    <h1>Read Library</h1>
+                    <p>Manga you've marked as read</p>
+                </div>
+
+                <div id="read-library" class="manga-grid">
+                    <!-- Read manga will be populated here -->
+                </div>
+
+                <div id="no-read" class="no-results hidden">
+                    <h3>No manga in read library</h3>
+                    <p>Start adding manga you've read!</p>
+                </div>
+            </div>
+
+            <!-- Liked Library View -->
+            <div id="liked-view" class="view hidden">
+                <div class="view-header">
+                    <h1>Liked Library</h1>
+                    <p>Manga you want to read</p>
+                </div>
+
+                <div id="liked-library" class="manga-grid">
+                    <!-- Liked manga will be populated here -->
+                </div>
+
+                <div id="no-liked" class="no-results hidden">
+                    <h3>No manga in liked library</h3>
+                    <p>Start adding manga you want to read!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add to Library Modal -->
+    <div id="add-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add to Library</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="selected-manga" class="selected-manga">
+                    <!-- Selected manga info will be populated here -->
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status:</label>
+                    <div class="status-options">
+                        <label class="radio-option">
+                            <input type="radio" name="status" value="liked" checked>
+                            <span>❤️ Want to Read</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="status" value="read">
+                            <span>📖 Already Read</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="cancel-add">Cancel</button>
+                <button class="btn btn--primary" id="confirm-add">Add to Library</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Axios for HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
