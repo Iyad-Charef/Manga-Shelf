@@ -58,14 +58,15 @@ const mangaSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Update lastUpdated on save
+// Update
 mangaSchema.pre('save', function(next) {
     this.lastUpdated = new Date();
     next();
 });
 
-// Indexes for better query performance
+// Indexes
 mangaSchema.index({ status: 1, dateAdded: -1 });
 mangaSchema.index({ title: 'text', author: 'text' });
+
 
 module.exports = mongoose.model('Manga', mangaSchema);
