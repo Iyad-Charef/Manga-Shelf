@@ -16,7 +16,7 @@ class MangaController {
 
             const results = await searchMangaDx(q.trim());
 
-            // Transform MangaDx data to our format
+            // Transform MangaDx data format
             const formattedResults = results.map(manga => {
             // Find cover_art relationship that contains attributes.fileName
             const coverRel = manga.relationships?.find(
@@ -180,5 +180,6 @@ class MangaController {
         }
     }
 }
+
 
 module.exports = new MangaController();
