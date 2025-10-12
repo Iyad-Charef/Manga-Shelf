@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const MANGADX_BASE_URL = process.env.MANGADX_API_BASE || 'https://api.mangadx.org';
 
-// Create axios instance with default config
+// axios
 const apiClient = axios.create({
     baseURL: MANGADX_BASE_URL,
     timeout: 10000, // 10 seconds
@@ -12,7 +12,7 @@ const apiClient = axios.create({
     }
 });
 
-// Request interceptor for logging
+// Request interceptor
 apiClient.interceptors.request.use(
     (config) => {
         console.log(`API Request: ${config.method.toUpperCase()} ${config.url}`);
@@ -24,7 +24,7 @@ apiClient.interceptors.request.use(
     }
 );
 
-// Response interceptor for error handling
+//error handling
 apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -77,11 +77,6 @@ async function getMangaCover(mangaId, coverId) {
     }
 }
 
-/**
- * Get detailed manga information
- * @param {string} mangaId - Manga ID
- * @returns {Promise<Object>} Detailed manga object
- */
 async function getMangaDetails(mangaId) {
     try {
         const response = await apiClient.get(`/manga/${mangaId}`, {
@@ -103,4 +98,5 @@ module.exports = {
     getMangaCover,
     getMangaDetails,
     apiClient
+
 };
