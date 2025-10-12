@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchResults = data.data;
             renderResults(searchResults);
             hideError();
-        } catch { /* Error already displayed */ }
+        } catch {  }
         hideLoading();
     });
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             library = data.data;
             renderLibrary(library);
             hideError();
-        } catch { /* Error already displayed */ }
+        } catch {  }
         hideLoading();
     }
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             showSuccess('Manga saved!');
             fetchLibrary();
-        } catch {/* Error already displayed */}
+        } catch { }
         hideLoading();
     }
 
@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function attachCardHandlers() {
-        // Save buttons in search results
         document.querySelectorAll('.btn-save').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const mangaId = btn.getAttribute('data-id');
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (found) addToLibrary(found, status);
             });
         });
-        // Remove buttons in library
+
         document.querySelectorAll('.btn-remove').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const mangaId = btn.getAttribute('data-id');
