@@ -1,4 +1,4 @@
-# Manga Shelf - Develogs 
+# Manga Shelf - Devlogs 
 
 ## Setup & Running
 
