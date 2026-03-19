@@ -1,103 +1,71 @@
-# Manga Shelf - Devlogs 
+# Manga Shelf 📚
 
-## Setup & Running
-
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account (or local MongoDB)
-
-### Backend Setup
-```bash
-cd Backend
-npm install
-
-# Create .env file with *your* :
-# PORT=5000
-# MONGODB_URI=mongodb_connection_string
-# JWT_ACCESS_SECRET=secret
-# JWT_REFRESH_SECRET=refresh_secret
-# JWT_ACCESS_EXPIRES_IN=15m
-# JWT_REFRESH_EXPIRES_IN=7d
-
-npm run dev
-```
-
-### Frontend Setup
-```bash
-cd manga-shelf-react
-npm install
-
-# Create .env file with:
-# VITE_API_URL=http://localhost:5000
-
-npm run dev
-```
-
-Visit `http://localhost:5173` for the frontend, backend runs on `http://localhost:5000`.
-
+You all-in-one manga tracking application.
 
 ## Why This Exists
 
 Started this project mainly to understand backend concepts more practically. I'm into cybersecurity and web exploitation, so understanding how backend systems work is pretty essential. Plus, I figured it'd be cool to make some backend-heavy sites of my own later.
 
-
-
-## Current Version - The Big React Pivot
-
-This project has had **many more iterations** than intended, this version is a pretty big update. I decided to add a **React frontend**, which was... interesting. I'm not a frontend dev at all, so I basically had to learn React on the spot for this. But hey, it works! 
-
 ## Tech Stack
+- **Frontend:** React, Tailwind CSS.
+- **Backend:** Node.js, Express, TypeScript, Prisma ORM, PostgreSQL.
+- **External Data:** MangaDex API for fetching manga covers and metadata.
 
-**Backend** (Express.js + Node.js)
-- Full REST API with routing and business logic
-- JWT-based authentication (access + refresh tokens)
-- MongoDB Atlas for user accounts
+## What's New?
+The project just went through a huge architectural upgrade:
+- **Database :** Fully migrated from MongoDB to **PostgreSQL** using **Prisma ORM**. Everything is now centralized and securely persistent.
+- **Library Management:** Added library lists (Reading, Completed...) with dynamic filtering and sorting.
+- **Interactivity:** A 5-star rating system and chapter progress tracking on the manga pages, and Profile pages now dynamically calculate stats based on your reading history.
+- **Secuirity:** Strengthened Express backend with `helmet` (for security), rate limiting, and a robust testing workflow (Jest + Supertest).
 
-**Frontend** (React + Vite)
-- Search interface connected to MangaDex API
-- User authentication UI (login/register modals)
-- Library management (liked/read sections)
-- LocalStorage-based manga library per user
+## Setup & Running
 
-**External APIs**
-- MangaDex API for manga search and metadata
+### 1. Backend Setup
+```bash
+cd Backend
+npm install
+```
+Create a `.env` file in the Backend directory with your database string and secrets:
+```env
+DATABASE_URL="postgresql://user:pass@localhost:5432/mangashelf"
+PORT=5000
+JWT_SECRET="your_super_secret"
+JWT_REFRESH_SECRET="your_refresh_secret"
+```
+Initialize the DB and start the server:
+```bash
+npx prisma db push
+npm run dev
+```
 
-## The Database Situation
+### 2. Frontend Setup
+```bash
+cd manga-shelf-react
+npm install
+```
+Create a `.env` file in the React app directory:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+Run the app:
+```bash
+npm run dev
+```
+Visit `http://localhost:5173` for the frontend (the backend hums along on port 5000).
 
-Users are stored in a central cloud database (MongoDB Atlas) because auth needs to be centralized and secure. But **manga libraries are currently stored locally** (browser localStorage) since I found this to be the most efficient and budget-friendly option without hosting a dedicated database for manga data.
-
-I'm planning to make a **hybrid solution** later down the line 
-
-## Future Ideas (In No Particular Order)
-
-- [ ] Rating system for manga
-- [ ] Progress tracking (current chapter)
-
+## Future Ideas 
+- [ ] **Reader page** - actually read manga chapters **locally** in the app
 - [ ] **MyAnimeList API integration** - better statistics and merge user data from other platforms
-- [ ] **Reader page** - actually read manga chapters **locally** in the app 
-- [ ] Library filters and sorting options
-- [ ] User profile customization
+- [ ] User profile customization & deeper statistics
 
 ### Long Term
-- [ ] **Desktop app** - ship everything as an Desktop/mobile app
-- [ ] Sync library across devices (would need backend storage then)
+- [ ] **Desktop app** - ship everything as a native desktop/mobile app
 - [ ] Recommendations engine
-- [ ] Social features? (maybe friends, sharing lists, etc.)
+- [ ] Social features (friends, sharing lists, etc.)
 
 ## Known Issues
-
-- No pagination on search results (MangaDex can return a lot)
-- UI needs work (darkmode - language selection ...etc)
-- localStorage has size limits (~5MB)
+- No pagination on search results yet (MangaDex returns a lot of data)
+- Needs theme switch and language preference options
 
 ## Contributing
-
-This is a personal learning project, but if you have ideas or want to mess around with it, feel free to fork it.
-
-## License
-
-This project is licensed under the MIT License.
----
-
-*Last updated: December 2025*
-*Status: ocaisonally tinkering with it*
+This is primarily a personal learning project, but if you have ideas or want to mess around with it, feel free to fork it.
